@@ -18,10 +18,8 @@ interface Props {
   platforms: Platform[]; // an array of platform objects
 }
 
-const PlatformIconList = ({ platforms }: Props) => {
-  // To map the slug(textual id) of each platfrom to an icon
+const PlatformIconList = ({ platforms = [] }: Props) => {
   const iconMap: { [key: string]: IconType } = {
-    // index signature (key of type string, grabbed in []): to annotate icon map - in this object, we have any number of string keys
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
@@ -32,10 +30,11 @@ const PlatformIconList = ({ platforms }: Props) => {
     ios: MdPhoneIphone,
     web: BsGlobe,
   };
+
   return (
     <HStack marginY={1}>
       {platforms.map((platform) => (
-        <Icon as={iconMap[platform.slug]} color="gray.500" />
+        <Icon key={platform.id} as={iconMap[platform.slug]} color="gray.500" />
       ))}
     </HStack>
   );
