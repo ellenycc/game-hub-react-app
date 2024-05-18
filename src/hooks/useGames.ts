@@ -12,6 +12,7 @@ export interface Game {
   name: string;
   background_image: string;
   parent_platforms: { platform: Platform}[] // each parent_platforms object has a property called platform
+  metacritic: number
 }
 
 interface FetchGamesResponse {
