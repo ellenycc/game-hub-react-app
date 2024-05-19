@@ -5,13 +5,13 @@ import { CanceledError } from "axios";
 export interface Platform {
   id: number;
   name: string;
-  slug: string; // slug is like a textual ID, all in lower case, not supposed to change so more reliable 
+  slug: string;
 }
 export interface Game {
   id: number;
   name: string;
   background_image: string;
-  parent_platforms: { platform: Platform}[] // each parent_platforms object has a property called platform
+  parent_platforms: { platform: Platform}[]
   metacritic: number
 }
 
@@ -23,22 +23,30 @@ interface FetchGamesResponse {
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
+  // To track loading state, declare a loading state variable
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
+    // Before calling API, set loading to true
+    setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", {signal: controller.signal})  // set signal property to controller.signal
-      .then((res) => setGames(res.data.results))
+      .then((res) => {
+        setGames(res.data.results)
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
-        setError(err.message)});
+        setError(err.message)
+        setLoading(false)});
 
       // cleaner function
       return () => controller.abort();
   }, []);
 
-  return {games, error}; // return an object
+  return {games, error, isLoading}; // return an object
 }
 
 export default useGames;
