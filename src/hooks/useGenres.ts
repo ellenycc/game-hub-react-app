@@ -3,6 +3,7 @@ import useData from './useData';
 export interface Genre {
   id: number;
   name: string;
+  image_background: string;
 }
 
 // we don't need the FetchGenreResponse anymore, hiding the details behind useGenres hook
