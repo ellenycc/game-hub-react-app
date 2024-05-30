@@ -6,6 +6,7 @@ import GameCardContainer from "./GameCardContainer";
 import { Genre } from "../hooks/useGenres";
 import usePlatforms from "../hooks/usePlatforms";
 import { GameQuery } from "../App";
+import GameHeading from "./GameHeading";
 
 interface Props {
   gameQuery: GameQuery;
