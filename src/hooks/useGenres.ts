@@ -1,4 +1,4 @@
-import useData from './useData';
+import genres from "../data/genres";
 
 export interface Genre {
   id: number;
@@ -6,7 +6,7 @@ export interface Genre {
   image_background: string;
 }
 
-// we don't need the FetchGenreResponse anymore, hiding the details behind useGenres hook
-const useGenres = () => useData<Genre>('/genres');
+// return an object is to minimize the impact of changes on the consumer(the GenreList component) of the useGenres hook 
+const useGenres = () => ({data: genres, isLoading: false, error: null});
 
 export default useGenres;
