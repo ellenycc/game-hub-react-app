@@ -16,9 +16,10 @@ const GameGrid = ({ gameQuery }: Props) => {
   const { data, error, isLoading } = useGames(gameQuery); // pass selectedGenre to useGames hook
   const skeletons = [1, 2, 3, 4, 5, 6]; // it's not changing over time, so no need state variables
 
+  if (error) return <Text>{error}</Text>;
+
   return (
     <>
-      {error && <Text>{error}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         padding="10px"
