@@ -1,25 +1,21 @@
 import {
-  HStack,
-  List,
-  ListItem,
-  Image,
-  Spinner,
   Button,
   Heading,
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Spinner,
 } from "@chakra-ui/react";
-import useGenres, { Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
-import { useState } from "react";
+import useGameQueryStore from "../store";
 
-// To notify the parent/consumer of this component (App) a genre has been selected
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenreId?: number;
-}
-
-const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
+const GenreList = () => {
   // first export interface Genre from useGenres
   const { data, isLoading, error } = useGenres();
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setSelectedGenreId = useGameQueryStore((s) => s.setGenreId);
 
   if (error) return null;
 
@@ -42,7 +38,7 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
                 textAlign="left"
                 fontSize="lg"
                 variant="link"
-                onClick={() => onSelectGenre(genre)}
+                onClick={() => setSelectedGenreId(genre.id)}
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
               >
                 {genre.name}
