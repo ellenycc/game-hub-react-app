@@ -3,7 +3,6 @@ import GameDetailPage from "./pages/GameDetailPage";
 import HomePage from "./pages/HomePage";
 import Layout from "./pages/Layout";
 import ErrorPage from "./pages/ErrorPage";
-import { Children } from "react";
 
 const router = createBrowserRouter([
   {
