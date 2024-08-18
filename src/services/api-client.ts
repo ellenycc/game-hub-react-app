@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 export interface FetchResponse<T> {
   count: number;
   next: string | null;
-  results: T[]; // generic type parameter
+  results: T[];
 }
 
 const axiosInstance = axios.create({
@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 });
 
 class APIClient<T> {
-  endpoint: string; // property "endpoint" of type string
+  endpoint: string;
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;

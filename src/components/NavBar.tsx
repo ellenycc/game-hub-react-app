@@ -5,8 +5,6 @@ import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  // simple form with single field, easier to use ref hook
-
   return (
     <HStack padding="10px">
       <Link to="/">
@@ -15,7 +13,7 @@ const NavBar = () => {
       <SearchInput />
       <ColorModeSwitch />
     </HStack>
-  ); // horizontal stack, defined in chakra-ui
+  );
 };
 
 export default NavBar;
